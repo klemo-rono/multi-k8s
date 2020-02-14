@@ -1,0 +1,22 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t rklemo/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true rklemo/react-test npm test
+
+after_success:
+  - docker build -t rklemo/multi-client ./client
+  - docker build -t rklemo/multi-nginx ./nginx
+  - docker build -t rklemo/multi-server ./server
+  - docker build -t rklemo/multi-worker ./worker
+  
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push rklemo/multi-client
+  - docker push rklemo/multi-nginx
+  - docker push rklemo/multi-server
+  - docker push rklemo/multi-worker
