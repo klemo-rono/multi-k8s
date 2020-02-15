@@ -1,6 +1,6 @@
 {
   "AWSEBDockerrunVersion": 2,
-  "ContainerDefinitions": [
+  "containerDefinitions": [
     {
       "name": "client",
       "image": "rklemo/multi-client",
@@ -33,17 +33,7 @@
         }
       ],
       "links": ["client", "server"],
-      "memory": 128,
-      "dependsOn": [
-        {
-            "containerName": "client",
-            "condition": "START"
-        },
-        {
-          "containerName": "server",
-          "condition": "START"
-        }
-      ]
+      "memory": 128
     }
   ]
 }
