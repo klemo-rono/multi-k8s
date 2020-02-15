@@ -1,0 +1,35 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "ContainerDefinitions": [
+    {
+      "name": "client",
+      "image": "rklemo/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "rklemo/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "rklemo/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "rklemo/multi-nginx",
+      "essential": true,
+      "portMappings": [
+        { 
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
