@@ -33,7 +33,17 @@
         }
       ],
       "links": ["client", "server"],
-      "memory": 128
+      "memory": 128,
+      "dependsOn": [
+        {
+            "containerName": "client",
+            "condition": "START"
+        },
+        {
+          "containerName": "server",
+          "condition": "START"
+        }
+      ]
     }
   ]
 }
