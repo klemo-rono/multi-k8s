@@ -12,9 +12,9 @@ function App() {
         <header>
           <Link to="/">Home</Link>
           <Link to="/otherpage">Other Page</Link>
-          <h1>Fib calculator</h1>
         </header>
         <div>
+          <h1>Fib calculator version 4</h1>
           <Route exact path='/' component={Fib} />
           <Route path="/otherpage" component={OtherPage} />
         </div>
