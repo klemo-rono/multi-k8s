@@ -14,7 +14,7 @@ deploy:
   - provider: script
     script: deploy_production.sh
     on:
-      branch: production
+      branch: master
   - provider: script
     script: deploy_staging.sh
     on:
