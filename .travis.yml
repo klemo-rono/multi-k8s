@@ -12,10 +12,10 @@ script:
   - docker run -e CI=true rklemo/react-test npm run test
 deploy:
   - provider: script
-    script: deploy_production.sh
+    script: bash ./deploy_production.sh
     on:
       branch: master
   - provider: script
-    script: deploy_staging.sh
+    script: bash ./deploy_staging.sh
     on:
       branch: staging
