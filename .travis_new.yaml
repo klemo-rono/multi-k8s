@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - SHA=$(git rev-parse --short HEAD)
+before_install: 
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t rklemo/react-test -f ./client/Dockerfile.dev ./client
+  
+script:
+  - docker run -e CI=true rklemo/react-test npm run test
+deploy:
+  - provider: script
+    script: deploy_production.sh
+    on:
+      branch: master
+  - provider: script
+    script: deploy_staging.sh
+    on:
+      branch: staging
